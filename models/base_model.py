@@ -16,12 +16,28 @@ class BaseModel:
           updated_at: timestamp of the update day of the class
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """Initializes the class object
+
+        Args:
+             *args(args): variable length of arguements
+             **kwargs(dict): keyworded variable length of arguements
         """
-        self.id = str(uuid4())
-        self.created_at = datetime.utcnow()
-        self.updated_at = datetime.utcnow()
+
+        FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
+        if not kwargs:
+            self.id = str(uuid4())
+            self.created_at = datetime.utcnow()
+            self.updated_at = datetime.utcnow()
+        else:
+            for key, value in kwargs.items():
+                if key == "created_at" or key == "updated_at":
+                    self.__dict__[key] = datetime.strptime(
+                        value, FORMAT)
+                elif key == "id":
+                    self.__dict__[key] = str(value)
+                else:
+                    self.__dict__[key] = value
 
     def save(self):
         """
@@ -34,11 +50,11 @@ class BaseModel:
         Returns a dict containing all keys/values of __dict__ of the instance
         """
         dict_map = {}
-        for k, v in self.__dict__.items():
-            if k == "created_at" or k == "updated_at":
-                dict_map[k] = v.isoformat()
+        for key, value in self.__dict__.items():
+            if key == "created_at" or key == "updated_at":
+                dict_map[key] = value.isoformat()
             else:
-                dict_map[k] = v
+                dict_map[key] = value
         dict_map["__class__"] = self.__class__.__name__
 
         return dict_map
