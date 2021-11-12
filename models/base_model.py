@@ -2,10 +2,9 @@
 """
 Module containing a base class from which other classes wiil inherit
 """
-
-
 from uuid import uuid4
 from datetime import datetime
+
 
 class BaseModel:
     """Base class from which other classes will inherit from
@@ -61,4 +60,4 @@ class BaseModel:
 
     def __str__(self):
         return "[{}] ({}) <{}>".format(self.__class__.__name__, self.id,
-                                       self.__dict__ )
+                                       self.__dict__)
