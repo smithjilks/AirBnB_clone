@@ -4,6 +4,7 @@ Module containing a base class from which other classes wiil inherit
 """
 from uuid import uuid4
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
@@ -28,13 +29,12 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.utcnow()
             self.updated_at = datetime.utcnow()
+            storage.new(self)
         else:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
                     self.__dict__[key] = datetime.strptime(
                         value, FORMAT)
-                elif key == "id":
-                    self.__dict__[key] = str(value)
                 else:
                     self.__dict__[key] = value
 
@@ -43,6 +43,7 @@ class BaseModel:
         Updates updated_at with modification date timestamp
         """
         self.updated_at = datetime.utcnow()
+        storage.save()
 
     def to_dict(self):
         """
@@ -59,5 +60,8 @@ class BaseModel:
         return dict_map
 
     def __str__(self):
-        return "[{}] ({}) <{}>".format(self.__class__.__name__, self.id,
+        """
+        Returns a string representation of the class
+        """
+        return "[{}] ({}) {}".format(self.__class__.__name__, self.id,
                                        self.__dict__)
