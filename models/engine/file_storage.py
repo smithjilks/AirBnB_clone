@@ -3,8 +3,6 @@
 Module that serializes and deserializes instances to/from JSON files
 """
 import json
-from models.base_model import BaseModel
-
 
 class FileStorage:
     """Class that serializes instances to a JSON file
@@ -17,6 +15,10 @@ class FileStorage:
 
     __file_path = "file.json"
     __objects = {}
+
+    def __init__(self):
+        """Initializes the class object"""
+        pass
 
     def all(self):
         """
@@ -34,15 +36,16 @@ class FileStorage:
         """
 
         obj_key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.objects[obj_key] = obj
+        self.__objects[obj_key] = obj
 
     def save(self):
         """
         serializes __objects to the JSON file (path: __file_path)
         """
-        with open(self.__file_path, 'w+') as f:
-            json.dump({key: value.to_dict()
-                       for key, value in self.__objects.items()}, f)
+        with open(self.__file_path, 'w', encoding='utf-8') as f:
+            dict_map = {key: value.to_dict()
+                    for key, value in self.__objects.items()}
+            json.dump(dict_map, f)
 
     def reload(self):
         """
@@ -52,7 +55,29 @@ class FileStorage:
         """
         try:
             with open(self.__file_path, 'r') as f:
-                __objects = json.loads(f.read())
+                dict_map = json.load(f)
+                dict_map = {key: self.dict()[value["__class__"]](**value)
+                        for key, value in dict_map.items()}
+                self.__objects = dict_map
 
         except Exception:
             pass
+
+    def dict(self):
+        """
+        Returns dict representaion of all the classes
+        """
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.place import Place
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.review import Review
+
+        return {
+            "BaseModel": BaseModel,"Amenity": Amenity,
+            "City": City, "Place": Place,
+            "Review": Review,"State": State,"User": User
+        }
+        
