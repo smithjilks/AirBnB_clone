@@ -4,6 +4,7 @@ Module that serializes and deserializes instances to/from JSON files
 """
 import json
 
+
 class FileStorage:
     """Class that serializes instances to a JSON file
     and deserializes JSON file to instances
@@ -43,8 +44,7 @@ class FileStorage:
         serializes __objects to the JSON file (path: __file_path)
         """
         with open(self.__file_path, 'w', encoding='utf-8') as f:
-            dict_map = {key: value.to_dict()
-                    for key, value in self.__objects.items()}
+            dict_map = {k: v.to_dict() for k, v in self.__objects.items()}
             json.dump(dict_map, f)
 
     def reload(self):
@@ -56,9 +56,9 @@ class FileStorage:
         try:
             with open(self.__file_path, 'r') as f:
                 dict_map = json.load(f)
-                dict_map = {key: self.dict()[value["__class__"]](**value)
-                        for key, value in dict_map.items()}
-                self.__objects = dict_map
+                dict = dict_map.items()
+                dict = {k: self.dict()[v["__class__"]](**v) for k, v in dict}
+                self.__objects = dict
 
         except Exception:
             pass
@@ -76,8 +76,7 @@ class FileStorage:
         from models.review import Review
 
         return {
-            "BaseModel": BaseModel,"Amenity": Amenity,
+            "BaseModel": BaseModel, "Amenity": Amenity,
             "City": City, "Place": Place,
-            "Review": Review,"State": State,"User": User
+            "Review": Review, "State": State, "User": User
         }
-        

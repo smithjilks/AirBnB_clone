@@ -63,5 +63,5 @@ class BaseModel:
         """
         Returns a string representation of the class
         """
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id,
-                                       self.__dict__)
+        class_name = self.__class__.__name__
+        return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
