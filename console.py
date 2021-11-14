@@ -144,6 +144,42 @@ class HBNBCommand(cmd.Cmd):
                             print(attr_value)
                         setattr(value, args[2], attr_value)
                         value.save()
+          pichu = 0
+
+        for i in objects_dic:
+            if objects_dic[i].__class__.__name__ == args[0]:
+                pichu += 1
+        print(pichu)
+
+    def default(self, line):
+        """default method to use with command()"""
+        line = line.replace('(', ' ').replace(')', ' ').replace('.', ' ')
+        line = line.replace(',', '').replace("'", '').replace('"', '')
+        args = line.split(" ")
+        args.remove("")
+        if len(args) > 1:
+            cmd = args[1]
+            args.remove(cmd)
+        if cmd == "update":
+            if "{" in line:
+                line = line.replace('{', '').replace('}', '').replace(':', '')
+                args = line.split(" ")
+                args.remove("")
+                static = args[0] + " " + args[2]
+                while len(args) >= 5:
+                    variable = args[3] + " " + args[4]
+                    args.remove(args[3])
+                    args.remove(args[3])
+                    argument = static + " " + variable
+                    eval('self.do_update' + '(argument)')
+                return
+        argument = ""
+        for arg in args:
+            argument = argument + arg + " "
+        try:
+            eval('self.do_' + cmd + '(argument)')
+        except:
+            print("** invalid command **")
 
 
 if __name__ == '__main__':
