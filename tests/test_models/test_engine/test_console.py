@@ -646,7 +646,7 @@ class TestHBNBCommand_all_method(unittest.TestCase):
     def test_count(self):
         try:
             os.remove("file.json")
-        except:
+        except Exception:
             pass
         with patch("sys.stdout", new=StringIO()) as obtained:
             HBNBCommand().onecmd("create BaseModel")
