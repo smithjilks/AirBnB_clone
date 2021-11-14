@@ -1,12 +1,23 @@
-<<<<<<< HEAD
 # AirBnB clone
+This project is a simple copy of the [AirBnB Website](https://www.airbnb.com/)
+The web application will be composed of:
 
-## Description
+     - A command interpreter to manipulate data without a visual interface, like in a Shell (perfect for development and debugging)
+     - A website (the front-end) that shows the final product to everybody: static and dynamic
+     - A database or files that store data (data = objects)
+     - An API that provides a communication interface between the front-end and your data (retrieve, create, delete, update them)
+
+## Concepts
+### The cosnsole
+<img src="./images/console.png" width=100%>
+__credit ALX-Software_Engineering__
+
+#### Description
 
 This is the first step towards building a first full web application: an AirBnB clone.
 It consists of a custom command-line interface for data management, and the base classes for the storage of this data.
 
-## Usage
+#### Usage
 
 The console works both in interactive mode and non-interactive mode, much like a Unix shell.
 It prints a prompt **(hbnb)** and waits for the user for input.
@@ -65,8 +76,5 @@ The test for the classes are in the [test_models](./tests/test_models/) folder.
 ## Authors
 
 - **Kevin Leitich** - [Kevleitich@gmail.com](https://github.com/kLeitich)
-- **Jilks Smith** -[]()
+- **Jilks Smith** - [smithjilks@gmail.com](https://github.com/smithjilks)
 
-=======
-# AirBnB_clone
->>>>>>> f494c01dcfdae5afe27f8077aa23d8b1fe2a06b8
