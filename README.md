@@ -65,7 +65,7 @@ The test for the classes are in the [test_models](./tests/test_models/) folder.
 ## Authors
 
 - **Kevin Leitich** - [Kevleitich@gmail.com](https://github.com/kLeitich)
-- **Jilks Smith** -[]()
+- **Jilks Smith** -[Smithjilks@gmail.com](github.com/smithjilks/AirBnB_clone)
 
 =======
 # AirBnB_clone
