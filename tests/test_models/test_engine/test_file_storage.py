@@ -12,7 +12,7 @@ from models.engine.file_storage import FileStorage
 
 class TestFileStorageClass(unittest.TestCase):
     """
-    BaseModel test class
+    FileStorage test class
     """
 
     def setUp(self):
@@ -64,6 +64,13 @@ class TestFileStorageClass(unittest.TestCase):
         storage.new(BaseModel())
         storage.reload()
         self.assertEqual(type(all_objects), type(storage.all().values()))
+
+    def test_dict(self):
+        """
+        Tests that the dict method returns a dict
+        """
+        classes_dict = storage.dict()
+        self.assertEqual(type(classes_dict), dict)
 
 
 if __name__ == '__main__':
