@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AirBnB clone
 
 ## Description
@@ -66,3 +67,6 @@ The test for the classes are in the [test_models](./tests/test_models/) folder.
 - **Kevin Leitich** - [Kevleitich@gmail.com](https://github.com/kLeitich)
 - **Jilks Smith** -[]()
 
+=======
+# AirBnB_clone
+>>>>>>> f494c01dcfdae5afe27f8077aa23d8b1fe2a06b8
